@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan | Hari & Ratna</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        script: ['Great Vibes', 'cursive'],
+                        heading: ['Playfair Display', 'serif'],
+                        body: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#277DB2',
+                        secondary: '#62A6CF',
+                        'dark': '#55595B',
+                        'grey': '#9D9D9D',
+                        'light': '#FBF3E7',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-body bg-bg-main text-text-dark text-center overflow-x-hidden leading-relaxed">
+
+    <main class="min-h-screen w-full bg-bg-light flex flex-col justify-center items-center p-5 overflow-hidden relative">
+    <img class="absolute -top-10 -left-20 rotate-[200deg] w-60 opacity-70" src="/flower1.png" alt="Bunga Kiri Atas">
+    <img class="absolute -top-10 -right-20 rotate-[160deg] w-60 scale-x-[-1] opacity-70" src="/flower1.png" alt="Bunga Kanan Atas">
+
+    <div class="relative z-10 flex flex-col items-center gap-y-3 md:gap-y-4 text-text-dark py-14">
+        <h1 
+            class="text-center text-xl font-medium font-heading text-primary"
+            data-aos="fade-down"
+            data-aos-duration="1000">
+            Undangan Pernikahan
+        </h1>
+        <img 
+            class="w-80 md:w-80 my-4 drop-shadow-xl" 
+            src="/image1.png" 
+            alt="Foto Pasangan"
+            data-aos="zoom-in"
+            data-aos-delay="200"
+            data-aos-duration="1000">
+        <h1 
+            class="font-script text-6xl md:text-7xl text-primary"
+            data-aos="fade-up"
+            data-aos-delay="400"
+            data-aos-duration="1000">
+            Hari & Ratna
+        </h1>
+        <span 
+            class="font-body font-semibold text-lg text-dark"
+            data-aos="fade-up"
+            data-aos-delay="500"
+            data-aos-duration="1000">
+            Sabtu, 13 September 2025
+        </span>
+        <span 
+            class="font-body text-sm text-dark"
+            data-aos="fade-up"
+            data-aos-delay="600"
+            data-aos-duration="1000">
+            Bojongsari RT 03/04
+        </span>
+        <span 
+            class="font-body text-sm mt-4"
+            data-aos="fade-up"
+            data-aos-delay="800"
+            data-aos-duration="1000">
+            Kepada Yth. Bapak/Ibu/Saudara/i:
+        </span>
+        <span 
+            class="font-heading font-bold text-2xl text-dark"
+            data-aos="zoom-in"
+            data-aos-delay="900"
+            data-aos-duration="1000">
+            Lutfi
+        </span>
+        <button 
+            class="mt-8 px-8 py-3 bg-primary text-white font-body font-bold text-lg rounded-full shadow-lg transition duration-300 hover:bg-opacity-80 hover:-translate-y-1"
+            data-aos="fade-up"
+            data-aos-delay="900"
+            data-aos-duration="1000">
+            Buka Undangan
+        </button>
+    </div>
+
+</main>
+
+    <audio id="background-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+        Browser Anda tidak mendukung elemen audio.
+    </audio>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
