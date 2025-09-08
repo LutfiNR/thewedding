@@ -1,113 +1,126 @@
 document.addEventListener('DOMContentLoaded', function() {
     
-    // Inisialisasi AOS (Animasi saat scroll)
-    AOS.init({
-        duration: 1000,
-        once: true,
-    });
+    gsap.registerPlugin(ScrollTrigger);
 
-    // FUNGSI UNTUK MEMBUKA FULLSCREEN
-    function openFullscreen() {
-        const elem = document.documentElement; // Targetnya adalah seluruh halaman HTML
-        if (elem.requestFullscreen) {
-            elem.requestFullscreen();
-        } else if (elem.mozRequestFullScreen) { // Firefox
-            elem.mozRequestFullScreen();
-        } else if (elem.webkitRequestFullscreen) { // Chrome, Safari and Opera
-            elem.webkitRequestFullscreen();
-        } else if (elem.msRequestFullscreen) { // IE/Edge
-            elem.msRequestFullscreen();
-        }
-    }
-
-    // === ELEMEN-ELEMEN PENTING ===
     const cover = document.getElementById('cover');
     const mainContent = document.getElementById('main-content');
     const openButton = document.getElementById('open-invitation');
     const guestNameElement = document.getElementById('guest-name');
     const backgroundMusic = document.getElementById('background-music');
-    const copyButton = document.getElementById('copy-button');
-    const accountNumber = document.getElementById('account-number').innerText;
 
-    // === MENGAMBIL NAMA TAMU DARI URL ===
     try {
         const urlParams = new URLSearchParams(window.location.search);
         const guestName = urlParams.get('to');
-
-        if (guestName) {
-            guestNameElement.textContent = decodeURIComponent(guestName).replace(/\+/g, ' ');
-        } else {
-            guestNameElement.textContent = "Tamu Undangan";
-        }
+        guestNameElement.textContent = guestName ? decodeURIComponent(guestName).replace(/\+/g, ' ') : "Tamu Undangan";
     } catch (error) {
         console.error("Error processing URL parameters:", error);
         guestNameElement.textContent = "Tamu Undangan";
     }
+    
+function runCoverAnimations() {
+        gsap.set("#cover .relative.z-10 > *", { opacity: 0, y: 20 });
+        gsap.set("#cover > img", { opacity: 0, y: -100 }); 
 
-    // === LOGIKA MEMBUKA UNDANGAN ===
+        const tl = gsap.timeline({ defaults: { duration: 1.2, ease: 'power2.out' } });
+
+        tl.to("#cover > img", { opacity: 0.7, y: 0, stagger: 0.2 })
+        .to("#cover h1:first-of-type", { opacity: 1, y: 0 }, "-=0.8")
+        .to("#cover img[src='./image1.png']", { opacity: 1, scale: 1 }, "-=0.9")
+        .to("#cover .font-script", { opacity: 1, y: 0 }, "-=0.9")
+        .to("#cover .font-body.font-semibold", { opacity: 1, y: 0 }, "-=0.8")
+        .to("#cover .font-body.text-sm.text-grey", { opacity: 1, y: 0 }, "-=0.8")
+        .to("#cover .font-body.text-sm.mt-8", { opacity: 1, y: 0, delay: 0.2 })
+        .to("#guest-name", { opacity: 1, scale: 1 })
+        .to("#open-invitation", { opacity: 1, y: 0 }, "-=0.5");
+    }
+
+    runCoverAnimations();
+
     openButton.addEventListener('click', function() {
-        // Panggil fungsi fullscreen saat tombol diklik
-        openFullscreen();
-
-        // 1. Buat cover menghilang (fade out)
-        cover.classList.add('opacity-0');
-        
-        // 2. Setelah transisi selesai, sembunyikan cover sepenuhnya dan tampilkan konten utama
-        setTimeout(() => {
-            cover.style.display = 'none';
-            mainContent.classList.remove('hidden');
-            document.body.classList.remove('cover-active'); // Aktifkan scroll
-            
-            // Re-inisialisasi AOS agar animasi di konten utama berjalan
-            AOS.refresh();
-        }, 1000); // Sesuaikan dengan durasi transisi di CSS
-
-        // 3. Putar musik latar
-        backgroundMusic.play().catch(error => {
-            console.log("Autoplay musik dicegah oleh browser.");
+        gsap.to(cover, {
+            opacity: 0,
+            duration: 1.2,
+            ease: 'power2.inOut',
+            onComplete: () => {
+                cover.style.display = 'none';
+                mainContent.classList.remove('hidden');
+                document.body.classList.remove('cover-active');
+                runScrollAnimations();
+            }
         });
+
+        if (backgroundMusic) {
+            backgroundMusic.play().catch(error => { console.log("Autoplay musik dicegah oleh browser."); });
+        }
     });
 
-    // === LOGIKA HITUNG MUNDUR (COUNTDOWN) ===
-    // Atur tanggal pernikahan Anda di sini: (TAHUN, BULAN-1, TANGGAL, JAM, MENIT, DETIK)
-    const weddingDate = new Date(2025, 8, 13, 9, 0, 0).getTime(); // 13 September 2025, 09:00
+    function runScrollAnimations() {
+        // Animasi yang sudah berjalan baik
+        gsap.timeline({ defaults: { duration: 1, ease: 'power2.out' } })
+            .from('#hero h4', { opacity: 0, y: -30, delay: 0.5 })
+            .from('#hero h1', { opacity: 0, scale: 0.8 }, '-=0.5')
+            .from('#hero p', { opacity: 0, y: 30 }, '-=0.5');
 
-    const countdownFunction = setInterval(function() {
+        gsap.from('#ayat p', { scrollTrigger: { trigger: '#ayat', start: 'top 80%' }, opacity: 0, y: 50, duration: 1, stagger: 0.3 });
+        gsap.from('#mempelai h2', { scrollTrigger: { trigger: '#mempelai', start: 'top 80%' }, opacity: 0, y: -50, duration: 1 });
+        gsap.from('.mempelai-pria', { scrollTrigger: { trigger: '.mempelai-pria', start: 'top 80%' }, opacity: 0, x: -100, duration: 1 });
+        gsap.from('.mempelai-wanita', { scrollTrigger: { trigger: '.mempelai-wanita', start: 'top 80%' }, opacity: 0, x: 100, duration: 1 });
+
+        
+        // ==========================================================
+        //         PERBAIKAN FINAL UNTUK SECTION WAKTU & ACARA
+        // ==========================================================
+        // Kita gabungkan animasi h2 dan kartu ke dalam SATU timeline
+        // yang dipicu oleh SATU ScrollTrigger. Ini cara paling andal.
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: '#acara',
+                start: 'top 80%',
+                // markers: true, // Hapus komentar ini jika masih ingin debug
+            }
+        })
+        .from('#acara h2', {
+            y: -50,
+            opacity: 0,
+            duration: 1
+        })
+                
+        // Lanjutan animasi untuk section lainnya
+        gsap.from('#countdown', { scrollTrigger: { trigger: '#countdown', start: 'top 80%' }, opacity: 0, scale: 0.9, duration: 1 });
+        gsap.from('#hadiah > *', { scrollTrigger: { trigger: '#hadiah', start: 'top 80%' }, opacity: 0, y: 50, duration: 1, stagger: 0.2 });
+        gsap.from('footer > *', { scrollTrigger: { trigger: 'footer', start: 'top 90%' }, opacity: 0, y: 50, duration: 1, stagger: 0.2 });
+    }
+
+    // Kode countdown dan copy-paste tetap sama...
+    const weddingDate = new Date('2025-09-13T09:00:00').getTime();
+    const countdownInterval = setInterval(function() {
         const now = new Date().getTime();
         const distance = weddingDate - now;
-
         if (distance < 0) {
-            clearInterval(countdownFunction);
+            clearInterval(countdownInterval);
             document.getElementById('countdown').innerHTML = "<h3 class='font-heading text-2xl text-primary'>Acara Telah Berlangsung</h3>";
             return;
         }
-
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        document.getElementById('days').innerText = days < 10 ? '0' + days : days;
-        document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
-        document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
-        document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+        document.getElementById('days').innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+        document.getElementById('hours').innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+        document.getElementById('minutes').innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+        document.getElementById('seconds').innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
     }, 1000);
 
-    // === LOGIKA SALIN NOMOR REKENING ===
-    copyButton.addEventListener('click', function() {
-        navigator.clipboard.writeText(accountNumber)
-            .then(() => {
-                const originalText = this.innerHTML;
-                this.innerHTML = 'Berhasil Disalin! <i class="fas fa-check"></i>';
-                
-                setTimeout(() => {
-                    this.innerHTML = originalText;
-                }, 2000);
-            })
-            .catch(err => {
-                console.error('Gagal menyalin: ', err);
-                alert('Gagal menyalin. Silakan salin manual.');
-            });
-    });
-
+    const copyButton = document.getElementById('copy-button');
+    if (copyButton) {
+        const accountNumber = document.getElementById('account-number').innerText;
+        copyButton.addEventListener('click', function() {
+            navigator.clipboard.writeText(accountNumber)
+                .then(() => {
+                    const originalText = this.innerHTML;
+                    this.innerHTML = 'Berhasil Disalin! <i class="fas fa-check"></i>';
+                    setTimeout(() => { this.innerHTML = originalText; }, 2000);
+                })
+                .catch(err => {
+                    console.error('Gagal menyalin: ', err);
+                    alert('Gagal menyalin. Silakan salin manual.');
+                });
+        });
+    }
 });
