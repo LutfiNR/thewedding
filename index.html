@@ -1,164 +1,414 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Undangan Pernikahan | Hari & Ratna</title>
-
+    <title>The Wedding of Devi & Herdi</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    colors: {
+                        'midnight-violet': '#351431',  
+                        'chocolate-plum': '#73454B',   
+                        'antique-white': '#faf3eb',    
+                        'parchment': '#F1EEEA',        
+                        'desert-sand': '#EECEB5',      
+                    },
                     fontFamily: {
                         script: ['Great Vibes', 'cursive'],
-                        heading: ['Playfair Display', 'serif'],
-                        body: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Work Sans', 'sans-serif'],
                     },
-                    colors: {
-                        primary: '#277DB2',    // Biru Utama
-                        secondary: '#62A6CF',  // Biru Muda
-                        'dark': '#55595B',      // Abu-abu Tua
-                        'grey': '#9D9D9D',      // Abu-abu
-                        'light': '#FBF3E7',     // Krem
+                    keyframes: {
+                        'sway-left': { 
+                            '0%': { transform: 'rotate(-3deg) scale(1)' },
+                            '100%': { transform: 'rotate(0deg) scale(1.05)' },
+                        },
+                        'sway-right': { 
+                            '0%': { transform: 'rotate(0deg) scale(1)' },
+                            '100%': { transform: 'rotate(-3deg) scale(1.05)' },
+                        },
+                        'pulse-slow': { 
+                            '0%, 100%': { transform: 'scale3d(1, 1, 1)' },
+                            '50%': { transform: 'scale3d(1.05, 1.05, 1.05)' },
+                        },
+                        'spin-slow': {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '100%': { transform: 'rotate(360deg)' },
+                        },
+                        'cloud-move': {
+                            '0%': { transform: 'translateX(100%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        }
+                    },
+                    animation: {
+                        'sway-left': 'sway-left 2s infinite alternate linear',
+                        'sway-right': 'sway-right 2.5s infinite alternate linear',
+                        'pulse-slow': 'pulse-slow 4s infinite linear',
+                        'spin-slow': 'spin-slow 12s linear infinite',
+                        'cloud-1': 'cloud-move 60s linear infinite',
+                        'cloud-2': 'cloud-move 40s linear infinite', 
+                        'cloud-3': 'cloud-move 25s linear infinite',
                     }
                 }
             }
         }
     </script>
+
+    <style>
+        body {
+            background-color: #F1EEEA; /* parchment */
+            overflow-x: hidden;
+        }
+        body.locked { overflow: hidden; }
+        
+        .ornament-layer { pointer-events: none; z-index: 10; }
+        
+        /* Smooth Scroll */
+        html { scroll-behavior: smooth; }
+
+        /* Cloud Layer */
+        .cloud-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden; pointer-events: none; z-index: 1;
+        }
+    </style>
 </head>
-<body class="bg-light text-dark text-center leading-relaxed cover-active">
+<body class="text-midnight-violet font-sans antialiased locked">
 
-    <div id="cover" class="min-h-screen w-full bg-light flex flex-col justify-center items-center p-5 overflow-hidden relative">
-        <img id="flower1" class="absolute -top-10 -left-10 scale-x-[-1] -top-6 w-60 opacity-70" src="./flower1.png" alt="Bunga Kiri Atas">
-        <img id="flower2" class="absolute -top-10 -right-10 -top-6 w-60 opacity-70" src="./flower1.png" alt="Bunga Kanan Atas">
+    <div id="opening-cover" class="fixed inset-0 z-[9999] bg-midnight-violet flex flex-col items-center justify-end pb-24 px-6 text-white transition-transform duration-[1500ms] ease-in-out overflow-hidden"
+         style="background: linear-gradient(to bottom, transparent 40%, rgba(53, 20, 49, 0.8) 60%, rgba(53, 20, 49, 1) 100%), url('photo-2.jpg') no-repeat center center / cover;">
 
-        <div class="relative z-10 flex flex-col items-center gap-y-3 md:gap-y-4 py-24 text-dark">
-            <h1 class="text-center text-xl font-medium font-heading text-primary">Undangan Pernikahan</h1>
-            <img class="w-80 md:w-96 my-4" src="./image1.png" alt="Foto Pasangan">
-            <h1 class="font-script text-6xl md:text-7xl text-primary mt-6">Hari & Ratna</h1>
-            <span class="font-body font-semibold text-md">Sabtu, 13 September 2025</span>
-            <span class="font-body text-sm text-grey">Bojongsari RT 03/04</span>
-            <span class="font-body text-sm mt-8">Kepada Yth. Bapak/Ibu/Saudara/i:</span>
-            <span id="guest-name" class="font-heading font-bold text-2xl"></span>
-            <button id="open-invitation" class="mt-8 px-8 py-3 bg-primary text-white font-body font-bold text-lg rounded-full shadow-lg transition duration-300 hover:bg-opacity-80 hover:-translate-y-1">
-                <i class="fas fa-envelope-open mr-2"></i> Buka Undangan
+        <div class="absolute bottom-0 left-0 w-full pointer-events-none z-10 flex justify-between items-end px-0">
+             <img src="bunga-1.png" class="w-48 md:w-64 opacity-80 animate-sway-left">
+             <img src="bunga-2.png" class="w-48 md:w-64 opacity-80 animate-sway-right">
+        </div>
+
+        <div class="relative z-30 text-center w-full max-w-md flex flex-col items-center mb-10" data-aos="fade-up" data-aos-duration="1000">
+            
+            <div class="mb-1">
+                <p class="font-serif tracking-[0.2em] uppercase mb-3 text-sm md:text-base text-antique-white drop-shadow-md">The Wedding Of</p>
+                <h1 class="font-script text-6xl md:text-8xl text-desert-sand drop-shadow-lg leading-tight">Devi & Herdi</h1>
+            </div>
+            
+            <div class="mb-10">
+                <p class="font-serif italic text-lg text-antique-white/90 mb-2">Dear</p>
+                <h3 id="recipient" class="font-sans font-bold text-2xl text-white tracking-wide">Bapak/Ibu/Saudara/i</h3>
+            </div>
+
+            <button onclick="bukaUndangan()" class="group relative w-auto px-10 py-4 bg-chocolate-plum text-antique-white font-serif rounded-full shadow-[0_4px_15px_rgba(53,20,49,0.4)] overflow-hidden transition-all hover:scale-105 hover:shadow-[0_8px_25px_rgba(53,20,49,0.5)] hover:bg-midnight-violet">
+                <span class="relative z-10 flex items-center justify-center gap-2 font-bold tracking-[0.1em] uppercase text-sm">
+                    Buka Undangan
+                </span>
             </button>
         </div>
     </div>
 
-    <main id="main-content" class="hidden max-w-4xl mx-auto bg-white shadow-2xl">
-        <header id="hero" class="h-[80vh] bg-[url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1770')] bg-no-repeat bg-center bg-cover flex justify-center items-center text-white relative">
-            <div class="absolute inset-0 bg-black/50"></div>
-            <div class="relative z-10">
-                <h1 class="font-script text-6xl md:text-8xl leading-none mb-2">Hari & Ratna</h1>
-                <p class="text-lg">13 September 2025</p>
-            </div>
-        </header>
+    <div id="music-control" class="fixed bottom-6 left-6 z-50 hidden transition-opacity duration-1000">
+        <button onclick="toggleMusic()" class="w-12 h-12 bg-parchment/90 backdrop-blur border-2 border-chocolate-plum rounded-full shadow-lg text-chocolate-plum flex items-center justify-center hover:bg-chocolate-plum hover:text-white transition">
+            <i id="music-icon" class="fas fa-compact-disc text-2xl animate-spin-slow"></i>
+        </button>
+        <audio id="bg-music" loop>
+            <source src="https://inv.punakawandigital.id/wp-content/uploads/2025/08/7.-Brisia-Jodie-Fabio-Asher-Aku-Memilihmu-dt-1.29.mp3" type="audio/mp3">
+        </audio>
+    </div>
 
-        <section id="ayat" class="py-20 px-5 text-lg text-grey">
-            <p class="max-w-3xl mx-auto">"Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang."</p>
-            <p class="font-script text-3xl mt-5 text-primary">QS. Ar-Rum: 21</p>
-        </section>
+    <img src="https://inv.punakawandigital.id/wp-content/uploads/2025/08/VINTAGE-06-ornamen.webp" class="fixed top-0 left-0 w-full opacity-20 z-0 pointer-events-none mix-blend-multiply">
 
-        <section id="mempelai" class="py-20 px-5 bg-light">
-            <h2 class="font-heading text-4xl text-primary">Mempelai</h2>
-            <div class="flex flex-col md:flex-row justify-center items-center gap-8 mt-10">
-                <div class="mempelai-pria">
-                    <img src="./pria.png" alt="Hari" class="w-44 h-44 rounded-full object-cover border-8 border-secondary shadow-lg mx-auto">
-                    <h3 class="font-script text-5xl mt-4 mb-1">Muhammad Jauhari Ngulumudin</h3>
-                    <p class="text-sm text-dark">Putra dari Bapak Ahmad Khadiq & Ibu Tri Handayani</p>
-                </div>
-                <div class="font-script text-7xl text-primary transform -rotate-12 my-4 md:my-0">&</div>
-                <div class="mempelai-wanita">
-                    <img src="./wanita.png" alt="Ratna" class="w-44 h-44 rounded-full object-cover border-8 border-secondary shadow-lg mx-auto">
-                    <h3 class="font-script text-5xl mt-4 mb-1">Susanti Ratna Rahayu</h3>
-                    <p class="text-sm text-dark">Putri dari Bapak Tukiman & Ibu Sugiyati</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="acara" class="py-20 px-5">
-            <h2 class="font-heading text-4xl text-primary">Waktu & Tempat Acara</h2>
-            <div class="flex flex-col md:flex-row justify-center gap-8 mt-6">
-                <div class="kartu-acara bg-white p-8 rounded-xl shadow-lg border border-secondary w-full max-w-sm transition duration-300 hover:-translate-y-1.5">
-                    <h3 class="font-heading text-3xl mb-4"><i class="fas fa-ring text-primary mr-2"></i>Akad Nikah</h3>
-                    <p class="font-bold text-primary">Sabtu, 13 September 2025</p>
-                    <p class="text-grey">Pukul 09:00 WIB - Selesai</p>
-                    <p class="mt-2 text-grey">Bertempat di:<br>Kediaman Mempelai Wanita <br> Dsn. Pasirgaru Rt03/04, Ds. Bojongsari, Kec. Kedungreja, Kab. Cilacap</p>
-                </div>
-                <div class="kartu-acara bg-white p-8 rounded-xl shadow-lg border border-secondary w-full max-w-sm transition duration-300 hover:-translate-y-1.5">
-                    <h3 class="font-heading text-3xl mb-4"><i class="fas fa-champagne-glasses text-primary mr-2"></i>Resepsi</h3>
-                    <p class="font-bold text-primary">Sabtu, 13 September 2025</p>
-                    <p class="text-grey">Pukul 09:00 - Selesai</p>
-                    <p class="mt-2 text-grey">Bertempat di:<br>Kediaman Mempelai Wanita <br> Dsn. Pasirgaru Rt03/04, Ds. Bojongsari, Kec. Kedungreja, Kab. Cilacap</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-20 px-5 bg-secondary text-dark">
-            <h2 class="font-heading text-4xl text-light">Hitung Mundur</h2>
-            <div id="countdown" class="flex justify-center gap-3 md:gap-5 mt-8">
-                <div class="timer-box bg-white/70 p-3 md:p-5 rounded-lg w-20 md:w-24 shadow-md">
-                    <span id="days" class="block text-3xl md:text-4xl font-bold text-primary">0</span>
-                    <span class="text-xs md:text-sm">Hari</span>
-                </div>
-                <div class="timer-box bg-white/70 p-3 md:p-5 rounded-lg w-20 md:w-24 shadow-md">
-                    <span id="hours" class="block text-3xl md:text-4xl font-bold text-primary">0</span>
-                    <span class="text-xs md:text-sm">Jam</span>
-                </div>
-                <div class="timer-box bg-white/70 p-3 md:p-5 rounded-lg w-20 md:w-24 shadow-md">
-                    <span id="minutes" class="block text-3xl md:text-4xl font-bold text-primary">0</span>
-                    <span class="text-xs md:text-sm">Menit</span>
-                </div>
-                <div class="timer-box bg-white/70 p-3 md:p-5 rounded-lg w-20 md:w-24 shadow-md">
-                    <span id="seconds" class="block text-3xl md:text-4xl font-bold text-primary">0</span>
-                    <span class="text-xs md:text-sm">Detik</span>
-                </div>
-            </div>
-        </section>
+    <div id="isi">
         
-        <section id="hadiah" class="py-20 px-5 bg-light">
-            <h2 class="font-heading text-4xl text-primary">Hadiah Spesial</h2>
-            <p class="mt-4 max-w-xl mx-auto">Doa restu Anda merupakan karunia yang sangat berarti bagi kami.</p>
-            <div class="kartu-hadiah bg-white border border-dashed border-primary p-6 rounded-lg max-w-sm mx-auto mt-8 shadow-sm">
-                <p class="font-bold text-lg">Bank BCA</p>
-                <p>A.N. Susanti Ratna</p>
-                <p id="account-number" class="font-mono text-lg my-1">7511127029</p>
-                <button id="copy-button" class="mt-4 px-5 py-2 bg-primary text-white rounded-full text-sm font-bold transition duration-300 hover:bg-opacity-80 flex items-center gap-2 mx-auto">
-                    Salin Nomor <i class="fas fa-copy"></i>
-                </button>
+        <div class="relative w-full h-screen overflow-hidden flex flex-col items-center justify-center text-center text-white">
+            <video autoplay muted playsinline class="absolute top-0 left-0 w-full h-full object-cover z-0">
+                <source src="https://hi.nikustory.id/wp-content/uploads/2025/08/Vintage-10-Motion-Pii.mp4" type="video/mp4">
+            </video>
+            <div class="absolute top-0 left-0 w-full h-full bg-black/40 z-10"></div>
+
+            <div class="relative z-20 px-4" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="500">
+                <div data-aos="fade-down" data-aos-duration="1000" data-aos-delay="1000">
+                    <h2 class="font-serif tracking-[0.2em] uppercase text-sm md:text-base mb-2">The Wedding of</h2>
+                </div>
+                <div data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="1500">
+                    <h1 class="font-script text-6xl md:text-8xl text-desert-sand mb-4 drop-shadow-lg leading-tight">Devi<br>&<br>Herdi</h1>
+                </div>
+                <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="2000">
+                    <h2 class="font-serif tracking-widest text-lg md:text-xl mb-8">26 . 12 . 2026</h2>
+                </div>
+                <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="2500">
+                    <a href="#date" class="inline-block px-8 py-3 bg-chocolate-plum text-antique-white font-serif rounded-full shadow-lg hover:bg-midnight-violet transition-all transform hover:scale-105 uppercase tracking-wider text-sm font-bold border border-white/20">
+                        Save The Date
+                    </a>
+                </div>
             </div>
-            <div class="kartu-hadiah bg-white border border-dashed border-primary p-6 rounded-lg max-w-sm mx-auto mt-8 shadow-sm">
-                <p class="font-bold text-lg">Shopee Pay</p>
-                <p>A.N. nadhifatul_umm4</p>
-                <p id="account-number" class="font-mono text-lg my-1">083846862989</p>
-                <button id="copy-button" class="mt-4 px-5 py-2 bg-primary text-white rounded-full text-sm font-bold transition duration-300 hover:bg-opacity-80 flex items-center gap-2 mx-auto">
-                    Salin Nomor <i class="fas fa-copy"></i>
-                </button>
+            <div class="h-20"></div> 
+        </div>
+
+        <section class="relative flex items-center justify-center py-32 px-4 overflow-hidden bg-parchment">
+            <div class="cloud-container opacity-20 pointer-events-none">
+                 <img src="https://kirimundangan.net/wp-content/uploads/2025/02/Art-2cloud1-1024x306.webp" class="absolute top-20 w-full animate-cloud-1">
+            </div>
+            
+            <img src="decor-3.png" class="absolute top-0 w-full opacity-80 z-0">
+
+            <img src="https://inv.punakawandigital.id/wp-content/uploads/2025/08/VINTAGE-06-bunga1.webp" class="absolute transform -bottom-12 -right-12 w-64 md:w-64 animate-sway-left opacity-80 z-0">
+            <img src="https://inv.punakawandigital.id/wp-content/uploads/2025/08/VINTAGE-06-bunga1.webp" class="absolute -bottom-12 scale-x-[-1] -left-12 w-64 md:w-64 animate-sway-left opacity-80 z-0">
+
+	    <div class="container mx-auto text-center relative z-10 max-w-3xl bg-antique-white/80 backdrop-blur-sm p-8 md:p-12 rounded-[50px] border-double border-4 border-chocolate-plum shadow-xl" data-aos="fade-up" data-aos-duration="1500">
+                <p class="font-serif uppercase tracking-widest text-chocolate-plum mb-4">We Are Getting Married</p>
+                <h2 class="font-script text-6xl md:text-7xl text-midnight-violet mb-6">Devi & Herdi</h2>
+                <img src="https://inv.punakawandigital.id/wp-content/uploads/2025/08/VINTAGE-06-batas.webp" class="w-48 mx-auto mb-6 opacity-70 mix-blend-multiply">
+                
+                <p class="italic text-midnight-violet leading-relaxed mb-6 font-serif">
+                    “Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya...”
+                </p>
+                <p class="font-bold text-chocolate-plum">(Qs. Ar. Rum : 21)</p>
             </div>
         </section>
 
-        <footer class="py-20 px-5">
-            <p class="max-w-2xl mx-auto">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.</p>
-            <h2 class="font-heading text-3xl mt-8">Terima Kasih</h2>
-            <h1 class="font-script text-6xl mt-2 text-primary">Hari & Ratna</h1>
+        <section class="py-20 bg-antique-white relative overflow-hidden">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row justify-center items-center gap-10 md:gap-20">
+                    
+                    <div class="text-center" data-aos="fade-right">
+                        <div class="relative w-64 h-80 mx-auto mb-6">
+                            <img src="photo-1.jpg" class="w-full h-full object-cover rounded-t-full border-4 border-chocolate-plum p-1 shadow-lg">
+                            <img src="https://inv.punakawandigital.id/wp-content/uploads/2025/08/VINTAGE-06-bunga1.webp" class="absolute -bottom-10 -left-10 w-32 animate-sway-left">
+                        </div>
+                        <h3 class="font-script text-4xl text-midnight-violet">Devi Yulianti</h3>
+                        <p class="text-chocolate-plum text-sm mt-2 font-semibold">Putri Ke-3</p>
+                        <p class="text-midnight-violet/80 text-sm">Bpk. Sumar & Ibu Sulastri</p>
+                    </div>
+
+                    <div class="text-5xl text-chocolate-plum font-script" data-aos="zoom-in">&</div>
+
+                    <div class="text-center" data-aos="fade-left">
+                        <div class="relative w-64 h-80 mx-auto mb-6">
+                            <img src="photo-3.jpg" class="w-full h-full object-cover rounded-t-full border-4 border-chocolate-plum p-1 shadow-lg">
+                            <img src="https://inv.punakawandigital.id/wp-content/uploads/2025/08/VINTAGE-06-bunga2.webp" class="absolute -bottom-10 -right-10 w-32 animate-sway-right">
+                        </div>
+                        <h3 class="font-script text-4xl text-midnight-violet">Herdi Ariantoro</h3>
+                        <p class="text-chocolate-plum text-sm mt-2 font-semibold">Putra Ke-3</p>
+                        <p class="text-midnight-violet/80 text-sm">Bpk. Rugimin & Ibu Sukarni</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-parchment relative">
+            <div class="container mx-auto px-4 max-w-4xl">
+                <h2 class="text-center font-script text-5xl text-chocolate-plum mb-12" data-aos="fade-up">Our Journey</h2>
+                
+                <div class="relative border-l-2 border-desert-sand ml-4 md:ml-auto md:mr-auto md:w-full space-y-12 md:space-y-0">
+                    
+                    <div class="relative pl-8 md:pl-0 md:flex md:justify-between md:items-center mb-10" data-aos="fade-up">
+                        <div class="md:w-5/12 md:text-right md:pr-8">
+                            <span class="text-chocolate-plum font-bold text-sm tracking-widest block mb-1">TAHUN 2020</span>
+                            <h4 class="font-serif text-xl text-midnight-violet mb-2 font-bold">Awal Bertemu</h4>
+                            <p class="text-midnight-violet/80 text-sm leading-relaxed">
+                                Tidak ada yang kebetulan di dunia ini, semua sudah tersusun rapi oleh Allah SWT. Kita tidak bisa memilih kepada siapa kita akan jatuh cinta. Kami bertemu pada tahun 2020. Tidak ada yang pernah menyangka bahwa pertemuan itu membawa kami pada suatu ikatan yang suci.
+                            </p>
+                        </div>
+                        <div class="absolute -left-2 top-0 w-6 h-6 bg-chocolate-plum rounded-full border-4 border-white md:static md:w-6 md:h-6 md:mx-auto md:bg-chocolate-plum md:border-4 md:border-white z-10"></div>
+                        <div class="hidden md:block md:w-5/12"></div>
+                    </div>
+
+                    <div class="relative pl-8 md:pl-0 md:flex md:justify-between md:items-center mb-10" data-aos="fade-up">
+                        <div class="hidden md:block md:w-5/12"></div>
+                        <div class="absolute -left-2 top-0 w-6 h-6 bg-chocolate-plum rounded-full border-4 border-white md:static md:w-6 md:h-6 md:mx-auto md:bg-chocolate-plum md:border-4 md:border-white z-10"></div>
+                        <div class="md:w-5/12 md:pl-8">
+                            <h4 class="font-serif text-xl text-midnight-violet mb-2 font-bold">Pendekatan</h4>
+                            <p class="text-midnight-violet/80 text-sm leading-relaxed">
+                                Seiring berjalannya waktu kami semakin dekat. Latar belakang yang berbeda membuat kami saling melengkapi dan banyak menemukan hal baru. Satu dua langkah menuntun kami hingga ke perjalanan selanjutnya. Percayaku padamu.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="relative pl-8 md:pl-0 md:flex md:justify-between md:items-center mb-10" data-aos="fade-up">
+                        <div class="md:w-5/12 md:text-right md:pr-8">
+                            <span class="text-chocolate-plum font-bold text-sm tracking-widest block mb-1">18 MEI 2025</span>
+                            <h4 class="font-serif text-xl text-midnight-violet mb-2 font-bold">Lamaran</h4>
+                            <p class="text-midnight-violet/80 text-sm leading-relaxed">
+                                Kehendak-Nya menuntun kami pada pertemuan yang tak pernah disangka hingga akhirnya membawa kami pada sebuah ikatan suci yang dicintai-Nya, kami melangsungkan acara lamaran pada 18 Mei 2025.
+                            </p>
+                        </div>
+                        <div class="absolute -left-2 top-0 w-6 h-6 bg-chocolate-plum rounded-full border-4 border-white md:static md:w-6 md:h-6 md:mx-auto md:bg-chocolate-plum md:border-4 md:border-white z-10"></div>
+                        <div class="hidden md:block md:w-5/12"></div>
+                    </div>
+
+                    <div class="relative pl-8 md:pl-0 md:flex md:justify-between md:items-center" data-aos="fade-up">
+                        <div class="hidden md:block md:w-5/12"></div>
+                        <div class="absolute -left-2 top-0 w-6 h-6 bg-chocolate-plum rounded-full border-4 border-white md:static md:w-6 md:h-6 md:mx-auto md:bg-chocolate-plum md:border-4 md:border-white z-10"></div>
+                        <div class="md:w-5/12 md:pl-8">
+                            <span class="text-chocolate-plum font-bold text-sm tracking-widest block mb-1">26 DESEMBER 2026</span>
+                            <h4 class="font-serif text-xl text-midnight-violet mb-2 font-bold">Menikah</h4>
+                            <p class="text-midnight-violet/80 text-sm leading-relaxed">
+                                Percayalah, bukan karna bertemu lalu berjodoh, tapi karna berjodoh lah maka kami dipertemukan. Atas izin Allah kami memutuskan untuk mengikrarkan janji suci pernikahan pada 26 Desember 2026. Sebagaimana yang pernah dikatakan oleh Saydina Ali bin Abi Thalib "apa yang menjadi takdirmu akan menemukan jalannya untuk sampe di titik menemukanmu."
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="date" class="py-24 bg-midnight-violet text-antique-white relative bg-fixed bg-cover bg-center" style="background-image: url('photo-2.jpg');">
+            <div class="absolute inset-0 bg-midnight-violet/80"></div>
+            <div class="container mx-auto px-4 relative z-10 text-center" data-aos="zoom-in-up">
+                <h2 class="font-script text-5xl text-desert-sand mb-10">Save The Date</h2>
+                <div class="flex justify-center gap-4 text-center">
+                    <div class="bg-white/10 backdrop-blur border border-desert-sand rounded-lg p-4 w-20">
+                        <span id="d" class="block text-3xl font-bold text-white">00</span><span class="text-xs text-desert-sand">Hari</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur border border-desert-sand rounded-lg p-4 w-20">
+                        <span id="h" class="block text-3xl font-bold text-white">00</span><span class="text-xs text-desert-sand">Jam</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur border border-desert-sand rounded-lg p-4 w-20">
+                        <span id="m" class="block text-3xl font-bold text-white">00</span><span class="text-xs text-desert-sand">Menit</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur border border-desert-sand rounded-lg p-4 w-20">
+                        <span id="s" class="block text-3xl font-bold text-white">00</span><span class="text-xs text-desert-sand">Detik</span>
+                    </div>
+                </div>
+                <p class="mt-8 font-serif italic text-antique-white">Jumat, 26 Desember 2026</p>
+            </div>
+        </section>
+
+        <section class="py-20 relative bg-parchment">
+            <img src="https://inv.punakawandigital.id/wp-content/uploads/2025/08/VINTAGE-06-ornamen2.webp" class="absolute top-0 left-0 w-full opacity-30 mix-blend-multiply">
+            
+            <div class="container mx-auto px-4 max-w-4xl relative z-10">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white p-8 rounded-xl shadow-xl border-t-4 border-chocolate-plum text-center transform hover:-translate-y-2 transition duration-300" data-aos="flip-left">
+                        <h3 class="font-script text-4xl text-chocolate-plum mb-4">Akad Nikah</h3>
+                        <p class="font-bold mb-2 text-midnight-violet">Jumat, 26 Desember 2026</p>
+                        <p class="mb-4 text-chocolate-plum font-semibold">Pukul 19.00 WIB</p>
+                        <p class="text-sm text-midnight-violet/80 mb-6">Bk 9 Gedung Rejo</p>
+                        <a href="#" class="inline-block bg-midnight-violet text-white px-6 py-2 rounded-full text-sm hover:bg-chocolate-plum transition shadow-md"><i class="fas fa-map-marker-alt"></i> Google Maps</a>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-xl shadow-xl border-t-4 border-chocolate-plum text-center transform hover:-translate-y-2 transition duration-300" data-aos="flip-right">
+                        <h3 class="font-script text-4xl text-chocolate-plum mb-4">Resepsi</h3>
+                        <p class="font-bold mb-2 text-midnight-violet">Sabtu, 27 Desember 2026</p>
+                        <p class="mb-4 text-chocolate-plum font-semibold">Pukul 09.00 WIB</p>
+                        <p class="text-sm text-midnight-violet/80 mb-6">Bk 9 Gedung Rejo</p>
+                        <a href="#" class="inline-block bg-midnight-violet text-white px-6 py-2 rounded-full text-sm hover:bg-chocolate-plum transition shadow-md"><i class="fas fa-map-marker-alt"></i> Google Maps</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-antique-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-center font-script text-5xl text-chocolate-plum mb-12" data-aos="fade-up">Our Moment</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <img src="photo-1.jpg" class="rounded-lg shadow-md hover:scale-105 transition duration-500 border-2 border-white" data-aos="zoom-in">
+                    <img src="photo-2.jpg" class="rounded-lg shadow-md hover:scale-105 transition duration-500 border-2 border-white" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="photo-3.jpg" class="rounded-lg shadow-md hover:scale-105 transition duration-500 border-2 border-white" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="photo-1.jpg" class="rounded-lg shadow-md hover:scale-105 transition duration-500 border-2 border-white" data-aos="zoom-in" data-aos-delay="300">
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-white text-center">
+            <div class="container mx-auto px-4 max-w-lg" data-aos="fade-up">
+                <h2 class="font-script text-5xl text-chocolate-plum mb-6">Wedding Gift</h2>
+                <p class="text-midnight-violet/80 mb-8">Doa restu Anda merupakan karunia yang sangat berarti bagi kami.</p>
+                
+                <div class="bg-parchment p-6 rounded-xl border border-desert-sand mb-4 shadow-sm">
+                    <i class="fas fa-gift text-4xl text-chocolate-plum mb-4"></i>
+                    <p class="font-mono text-xl mb-1 text-midnight-violet">xxxx xxxx xxxx</p>
+                    <p class="text-sm text-midnight-violet/70">a.n Devi Yulianti</p>
+                    <button onclick="alert('Nomor rekening disalin!')" class="mt-4 text-xs text-chocolate-plum border border-chocolate-plum px-3 py-1 rounded hover:bg-chocolate-plum hover:text-white transition cursor-pointer"><i class="far fa-copy"></i> Salin</button>
+                </div>
+            </div>
+        </section>
+
+        <footer class="bg-midnight-violet text-antique-white py-10 text-center relative overflow-hidden">
+            <img src="https://inv.punakawandigital.id/wp-content/uploads/2025/08/VINTAGE-06-batas.webp" class="w-full absolute bottom-0 left-0 opacity-10">
+            <h2 class="font-script text-4xl mb-2 text-desert-sand">Devi & Herdi</h2>
+            <p class="text-xs tracking-widest text-parchment">TERIMA KASIH</p>
         </footer>
-    </main>
+    </div>
 
-    <audio id="background-music" loop>
-        <source src="https://cdn.pixabay.com/audio/2021/07/18/audio_c993f91966.mp3" type="audio/mpeg">
-    </audio>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        //fungsi untuk menampilkan penerima berdasarkan params
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const recipient = urlParams.get('to');
+        if(recipient){
+            document.getElementById('recipient').textContent = recipient;
+        }
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+        // Init AOS
+        AOS.init({
+            once: false, 
+            mirror: true,
+            duration: 1000
+        });
 
-    <script src="script.js"></script>
+        // Buka Undangan Logic
+        function bukaUndangan() {
+            const cover = document.getElementById('opening-cover');
+            const musicBtn = document.getElementById('music-control');
+            const music = document.getElementById('bg-music');
+            
+            // Slide Up Effect
+            cover.style.transform = 'translateY(-100%)';
+            
+            // Enable Scroll
+            document.body.classList.remove('locked');
+            
+            // Play Music
+            music.play().catch(error => console.log("Audio play blocked by browser policy"));
+            musicBtn.classList.remove('hidden');
+            musicBtn.classList.remove('opacity-0');
+        }
+
+        // Toggle Music
+        function toggleMusic() {
+            const music = document.getElementById('bg-music');
+            const icon = document.getElementById('music-icon');
+            
+            if (music.paused) {
+                music.play();
+                icon.classList.add('animate-spin-slow');
+                icon.classList.remove('fa-play');
+                icon.classList.add('fa-compact-disc');
+            } else {
+                music.pause();
+                icon.classList.remove('animate-spin-slow');
+                icon.classList.remove('fa-compact-disc');
+                icon.classList.add('fa-play');
+            }
+        }
+
+        // Countdown Target: Jumat, 26 Desember 2026 jam 19:00 (Akad)
+        // Format: Month Day, Year Hour:Minute:Second
+        const target = new Date("Dec 26, 2026 19:00:00").getTime();
+        
+        setInterval(() => {
+            const now = new Date().getTime();
+            const diff = target - now;
+            
+            document.getElementById('d').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('h').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById('m').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('s').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+        }, 1000);
+    </script>
 </body>
 </html>
