@@ -82,6 +82,9 @@
 [data-aos-delay="6000"] {
     transition-delay: 6s !important;
 }
+.fa-compact-disc-custom {
+	background: url('music_play.png');
+}
 
         
 
@@ -172,8 +175,6 @@
     <div id="desktop-sidebar" class="bg-midnight-violet bg-cover bg-center flex-col items-center justify-center text-white hidden relative overflow-hidden"
          style="background: linear-gradient(rgba(53, 20, 49, 0.6), rgba(53, 20, 49, 0.8)), url('photo-2.webp') no-repeat center center / cover;">
         
-       
-
         <div class="relative z-10 text-center px-10">
             <p class="font-serif tracking-[0.3em] uppercase mb-4 text-antique-white drop-shadow-md">The Wedding Of</p>
             <h1 class="font-script text-8xl md:text-9xl text-desert-sand drop-shadow-xl mb-6">Devi & Herdi</h1>
@@ -187,12 +188,12 @@
     <div id="opening-cover" class="fixed inset-0 z-[9999] bg-midnight-violet flex flex-col items-center justify-end pb-24 px-6 text-white transition-transform duration-[1500ms] ease-in-out overflow-hidden"
          style="background: linear-gradient(to bottom, transparent 40%, rgba(53, 20, 49, 0.8) 60%, rgba(53, 20, 49, 1) 100%), url('photo-2.webp') no-repeat center center / cover;">
 
-        <div class="absolute bottom-0 left-0 w-full pointer-events-none z-10 flex justify-between items-end px-0">
-             <img src="bunga-1.png" class="w-48 md:w-64 opacity-80 animate-sway-left">
-             <img src="bunga-2.png" class="w-48 md:w-64 opacity-80 animate-sway-right">
+        <div class="absolute w-full pointer-events-none z-10 flex justify-between items-end px-0">
+             <img src="bunga-1.png" class="w-full -left-32 -bottom-32 absolute opacity-80 animate-sway-left">
+             <img src="bunga-2.png" class="w-full -right-20 -bottom-32 absolute opacity-80 animate-sway-right">
         </div>
 
-        <div class="relative z-30 text-center w-full max-w-md flex flex-col items-center mb-10" data-aos="fade-up" data-aos-duration="1000">
+        <div class="relative z-30 text-center w-full max-w-md flex flex-col items-center" data-aos="fade-up" data-aos-duration="1000">
             
             <div class="mb-1 lg:hidden">
                 <p class="font-serif tracking-[0.2em] uppercase mb-3 text-sm md:text-base text-antique-white drop-shadow-md">The Wedding Of</p>
@@ -214,7 +215,7 @@
 
     <div id="music-control" class="fixed bottom-6 left-6 z-50 hidden transition-opacity duration-1000">
         <button onclick="toggleMusic()" class="w-12 h-12 bg-parchment/90 backdrop-blur border-2 border-chocolate-plum rounded-full shadow-lg text-chocolate-plum flex items-center justify-center hover:bg-chocolate-plum hover:text-white transition">
-            <i id="music-icon" class="fas fa-compact-disc text-lg animate-spin-slow"></i>
+            <i id="music-icon" class="fas fa-compact-disc-custom text-lg animate-spin-slow"></i>
         </button>
         <audio autoplay id="bg-music" loop>
             <source src="audio.mp3" type="audio/mp3">
@@ -251,10 +252,11 @@
             </div>
             <div class="h-20"></div> 
         </div>
+<div class="relative w-full z-30 pointer-events-none">
+        <img src="ribbon.png" class="absolute left-0 w-full -top-32 md:-top-24 drop-shadow-xl">
+    </div>
 
-        <section class="relative flex items-center justify-center py-32 px-4 overflow-hidden bg-parchment">
-            
-            
+        <section class="relative min-h-screen flex items-center justify-center py-32 px-4 overflow-hidden bg-parchment">
             <img src="decor-3.png" class="absolute top-0 w-full opacity-80 z-0">
 
             <img src="decor-4.png" class="absolute transform -bottom-10 -right-8 w-64 md:w-64 animate-sway-left opacity-80 z-0">
@@ -269,7 +271,9 @@
                 <p class="font-bold text-chocolate-plum">(Qs. Ar. Rum : 21)</p>
             </div>
         </section>
-
+<div class="relative w-full z-30 pointer-events-none">
+        <img src="ribbon.png" class="absolute left-0 w-full -top-32 md:-top-24 drop-shadow-xl">
+    </div>
         <section class="py-20 bg-antique-white relative overflow-hidden">
             
             <div class="container mx-auto px-4">
@@ -300,7 +304,9 @@
                 </div>
             </div>
         </section>
-
+<div class="relative w-full z-30 pointer-events-none">
+        <img src="ribbon.png" class="absolute left-0 w-full -top-32 md:-top-24 drop-shadow-xl">
+    </div>
         <section class="py-20 bg-parchment relative">
             <div class="container mx-auto px-4 max-w-4xl">
                 <h2 class="text-center font-script text-5xl text-chocolate-plum mb-12" data-aos="fade-up">Our Journey</h2>
@@ -357,7 +363,9 @@
                 </div>
             </div>
         </section>
-
+<div class="relative w-full z-30 pointer-events-none">
+        <img src="ribbon.png" class="absolute left-0 w-full -top-32 md:-top-24 drop-shadow-xl">
+    </div>
         <section id="date" class="py-24 bg-midnight-violet text-antique-white relative bg-fixed bg-cover bg-center" style="background-image: url('photo-2.webp');">
             <div class="absolute inset-0 bg-midnight-violet/80"></div>
             <div class="container mx-auto px-4 relative z-10 text-center" data-aos="zoom-in-up">
@@ -381,7 +389,6 @@
         </section>
 
         <section class="py-20 relative bg-parchment">
-            <img src="https://inv.punakawandigital.id/wp-content/uploads/2025/08/VINTAGE-06-ornamen2.webp" class="absolute top-0 left-0 w-full opacity-30 mix-blend-multiply">
             
             <div class="container mx-auto px-4 max-w-4xl relative z-10">
                 <div class="grid gap-8">
@@ -403,7 +410,9 @@
                 </div>
             </div>
         </section>
-
+<div class="relative w-full z-30 pointer-events-none">
+        <img src="ribbon.png" class="absolute left-0 w-full -top-32 md:-top-24 drop-shadow-xl">
+    </div>
         <section class="py-20 bg-antique-white">
             <div class="container mx-auto px-4">
                 <h2 class="text-center font-script text-5xl text-chocolate-plum mb-12" data-aos="fade-up">Our Moment</h2>
@@ -423,15 +432,24 @@
                 
                 <div class="bg-parchment p-6 rounded-xl border border-desert-sand mb-4 shadow-sm">
                     <i class="fas fa-gift text-4xl text-chocolate-plum mb-4"></i>
-                    <p class="font-mono text-xl mb-1 text-midnight-violet">xxxx xxxx xxxx</p>
+                    <p id="nomor-rekening" class="font-mono text-xl mb-1 text-midnight-violet">081540879079</p>
                     <p class="text-sm text-midnight-violet/70">a.n Devi Yulianti</p>
-                    <button onclick="alert('Nomor rekening disalin!')" class="mt-4 text-xs text-chocolate-plum border border-chocolate-plum px-3 py-1 rounded hover:bg-chocolate-plum hover:text-white transition cursor-pointer"><i class="far fa-copy"></i> Salin</button>
+                    <p class="text-sm text-midnight-violet/70">Dana</p>
+                    <button onclick="salinTeks()" class="mt-4 text-xs text-chocolate-plum border border-chocolate-plum px-3 py-1 rounded hover:bg-chocolate-plum hover:text-white transition cursor-pointer"><i class="far fa-copy"></i> Salin</button>
                 </div>
+                
+                <div class="bg-parchment p-6 rounded-xl border border-desert-sand mb-4 shadow-sm">
+                    <i class="fas fa-gift text-4xl text-chocolate-plum mb-4"></i>
+                    <p id="nomor-rekening" class="font-mono text-xl mb-1 text-midnight-violet">901010074061</p>
+                    <p class="text-sm text-midnight-violet/70">a.n Devi Yulianti</p>
+                    <p class="text-sm text-midnight-violet/70">Sea Bank</p>
+                    <button onclick="salinTeks()" class="mt-4 text-xs text-chocolate-plum border border-chocolate-plum px-3 py-1 rounded hover:bg-chocolate-plum hover:text-white transition cursor-pointer"><i class="far fa-copy"></i> Salin</button>
+                </div>
+                
             </div>
         </section>
 
         <footer class="bg-midnight-violet text-antique-white py-10 text-center relative overflow-hidden">
-            <img src="https://inv.punakawandigital.id/wp-content/uploads/2025/08/VINTAGE-06-batas.webp" class="w-full absolute bottom-0 left-0 opacity-10">
             <h2 class="font-script text-4xl mb-2 text-desert-sand">Devi & Herdi</h2>
             <p class="text-xs tracking-widest text-parchment">TERIMA KASIH</p>
         </footer>
@@ -489,10 +507,10 @@
             if (music.paused) {
                 music.play();
                 icon.classList.remove('fa-music');
-                icon.classList.add('fa-compact-disc', 'animate-spin-slow');
+                icon.classList.add('fa-compact-disc-custom', 'animate-spin-slow');
             } else {
                 music.pause();
-                icon.classList.remove('fa-compact-disc', 'animate-spin-slow');
+                icon.classList.remove('fa-compact-disc-custom', 'animate-spin-slow');
                 icon.classList.add('fa-music');
             }
         }
@@ -511,6 +529,20 @@
             document.getElementById('s').innerText = Math.floor((diff % (1000 * 60)) / 1000);
         }, 1000);
         
+        function salinTeks() {
+    // Ambil elemen teks berdasarkan ID
+    const teks = document.getElementById("nomor-rekening").innerText;
+
+    // Gunakan API clipboard modern
+    navigator.clipboard.writeText(teks).then(() => {
+        // Jika berhasil, tampilkan alert
+        alert("Nomor rekening berhasil disalin: " + teks);
+    }).catch(err => {
+        // Jika gagal (misal browser lama), tampilkan error di console
+        console.error('Gagal menyalin text: ', err);
+        alert("Gagal menyalin otomatis. Silakan salin manual.");
+    });
+}
         
         // ... kode javascript kamu yang lain ...
 
@@ -522,7 +554,7 @@
             // Beri sedikit jeda agar transisi halus
             setTimeout(() => {
                 loader.classList.add('loader-hide');
-            }, 500); 
+            }, 1000); 
         });
     </script>
 </body>
