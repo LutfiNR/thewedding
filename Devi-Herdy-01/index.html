@@ -890,7 +890,7 @@
             t.classList.remove("opacity-0");
             if (n) n.play();
             document.getElementById('hero-section').classList.add('run-animation');
-
+            loadWishes();
             setTimeout((() => {
                 if ("undefined" != typeof AOS) AOS.refreshHard()
             }), 50);
